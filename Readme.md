@@ -17,7 +17,7 @@ In Arduino, Go to `Sketch` --> `Include Library` --> `Manage Library`, search fo
 #define NUM_PIXELS 824 // The number of Led Lights
 #define DIN_PIN 6 // The Pin Number of your Led (Din)wire
 
-uint32_t pix[NUM_PIXELS];
+uint32_t pix[NUM_PIXELS]; //unsigned integer range(0-4294967295)
 char input[NUM_PIXELS * 3 ]; // total input value, led num * 3 (each led has r, g, b three value)
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, DIN_PIN, NEO_GRB + NEO_KHZ800);
@@ -34,8 +34,9 @@ void loop()
   char charsRead;
   if (Serial.available() > 0)
   {
-    charsRead = Serial.readBytes(input, NUM_PIXELS * 3);
+    charsRead = Serial.readBytes(input, NUM_PIXELS * 3); // read the bytes
 
+    // calculate the rgb value in the led strip
     for (int i = 0; i < NUM_PIXELS; i++)
     {
       r = input[i * 3]; 
